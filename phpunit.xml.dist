@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         executionOrder="depends,defects"
+         cacheDirectory="var/cache/test">
+    <php>
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_DEBUG" value="1"/>
+        <env name="DATABASE_URL" value="mysql://investment_user:investment_password@database:3306/investment_walkthrough_test?serverVersion=9.7&amp;charset=utf8mb4"/>
+    </php>
+</phpunit>

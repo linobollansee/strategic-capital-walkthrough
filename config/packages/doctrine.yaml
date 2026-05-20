@@ -1,0 +1,12 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        server_version: '9.7'
+        charset: utf8mb4
+    orm:
+        auto_mapping: true
+
+when@test:
+    doctrine:
+        dbal:
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'

@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strategic Capital Walkthrough{% endblock %}
+
+{% block body %}
+    <section class="hero" data-reveal>
+        <div class="hero__content">
+            <p class="eyebrow">Investment planning overview</p>
+            <h2>Portfolio construction for disciplined financial decision-making.</h2>
+            <p class="lede">
+                This walkthrough presents a structured investment process: define the objective, allocate capital,
+                manage downside exposure, and review the portfolio on a fixed cadence.
+            </p>
+            <div class="hero__metrics">
+                <article>
+                    <strong data-count="100">100</strong>
+                    <span>% allocation model</span>
+                </article>
+                <article>
+                    <strong>Q</strong>
+                    <span>Quarterly review cycle</span>
+                </article>
+                <article>
+                    <strong>{{ reviewDate|date('M Y') }}</strong>
+                    <span>Reference review date</span>
+                </article>
+            </div>
+        </div>
+
+        <aside class="hero__panel" aria-label="Key controls" data-reveal>
+            <h3>Operating controls</h3>
+            <ul>
+                <li>Define risk capacity before selecting instruments.</li>
+                <li>Keep liquidity for scheduled and unscheduled withdrawals.</li>
+                <li>Document the rationale for every tactical position.</li>
+            </ul>
+        </aside>
+    </section>
+
+    <section id="framework" class="section" data-reveal>
+        <div class="section__header">
+            <p class="eyebrow">Framework</p>
+            <h2>Investment process</h2>
+        </div>
+
+        <div class="process-grid">
+            {% for milestone in milestones %}
+                <article class="card card--process">
+                    <p class="card__label">{{ loop.index }}</p>
+                    <h3>{{ milestone.label }}</h3>
+                    <p>{{ milestone.value }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="allocation" class="section" data-reveal>
+        <div class="section__header">
+            <p class="eyebrow">Allocation</p>
+            <h2>Strategic portfolio composition</h2>
+        </div>
+
+        <div class="allocation-list">
+            {% for item in portfolio %}
+                <article class="allocation-card">
+                    <div class="allocation-card__row">
+                        <div>
+                            <h3>{{ item.label }}</h3>
+                            <p>{{ item.detail }}</p>
+                        </div>
+                        <strong>{{ item.allocation }}%</strong>
+                    </div>
+                    <div class="allocation-bar" aria-hidden="true">
+                        <span class="allocation-bar__fill" data-allocation-bar data-allocation="{{ item.allocation }}"></span>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="execution" class="section section--split" data-reveal>
+        <div>
+            <div class="section__header">
+                <p class="eyebrow">Execution</p>
+                <h2>Operating principles</h2>
+            </div>
+
+            <div class="principles">
+                {% for principle in principles %}
+                    <article class="card card--principle">
+                        <p>{{ principle }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+
+        <aside class="card card--summary">
+            <p class="card__label">Database readiness</p>
+            <h3>MySQL 9.7 LTS configuration</h3>
+            <p>
+                The Symfony kernel is configured for Doctrine ORM and Doctrine Migrations so the project can move
+                from a walkthrough view to persisted portfolio records without reworking the application structure.
+            </p>
+        </aside>
+    </section>
+{% endblock %}
