@@ -16,27 +16,16 @@ class InvestmentSnapshot
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
-    private string $portfolioName;
+    #[ORM\ManyToOne(inversedBy: 'snapshots')]
+    #[ORM\JoinColumn(nullable: false)]
+    private Portfolio $portfolio;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
-    private string $allocation;
-
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
-    private string $expectedAnnualReturn;
-
-    #[ORM\Column(length: 32)]
-    private string $riskBand;
-
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(name: 'reviewed_at', type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $reviewedAt;
 
-    public function __construct(string $portfolioName, string $allocation, string $expectedAnnualReturn, string $riskBand, \DateTimeImmutable $reviewedAt)
+    public function __construct(Portfolio $portfolio, \DateTimeImmutable $reviewedAt)
     {
-        $this->portfolioName = $portfolioName;
-        $this->allocation = $allocation;
-        $this->expectedAnnualReturn = $expectedAnnualReturn;
-        $this->riskBand = $riskBand;
+        $this->portfolio = $portfolio;
         $this->reviewedAt = $reviewedAt;
     }
 
@@ -45,24 +34,15 @@ class InvestmentSnapshot
         return $this->id;
     }
 
-    public function getPortfolioName(): string
+    public function getPortfolio(): Portfolio
     {
-        return $this->portfolioName;
+        return $this->portfolio;
     }
 
-    public function getAllocation(): string
+    public function setPortfolio(?Portfolio $portfolio): self
     {
-        return $this->allocation;
-    }
-
-    public function getExpectedAnnualReturn(): string
-    {
-        return $this->expectedAnnualReturn;
-    }
-
-    public function getRiskBand(): string
-    {
-        return $this->riskBand;
+        $this->portfolio = $portfolio;
+        return $this;
     }
 
     public function getReviewedAt(): \DateTimeImmutable

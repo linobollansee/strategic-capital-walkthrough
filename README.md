@@ -1,5 +1,28 @@
 # Strategic Capital Walkthrough
 
+This project is a Symfony app demonstrating portfolio construction.
+
+Quick dev setup (choose one):
+
+- Using Docker Compose (recommended):
+
+```bash
+docker compose up -d --build
+./scripts/dev-setup.sh
+```
+
+- Local (no Docker): ensure you have PHP + MySQL running and then:
+
+```bash
+composer install
+php bin/console doctrine:migrations:migrate --no-interaction
+php bin/console doctrine:fixtures:load --no-interaction
+php -S 127.0.0.1:8000 -t public
+```
+
+The `scripts/dev-setup.sh` script will attempt to use Docker Compose when available, otherwise it runs migrations and loads fixtures locally.
+# Strategic Capital Walkthrough
+
 Strategic Capital Walkthrough is a Symfony application that presents a formal investment-planning scenario for financial portfolios. The project is structured as a concise walkthrough: it explains the framework, shows an allocation model, documents execution controls, and includes the infrastructure required to move the concept toward persisted data.
 
 ## Technology Stack
